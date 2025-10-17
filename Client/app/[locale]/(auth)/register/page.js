@@ -190,9 +190,10 @@ export default function Login() {
                   color="secondary"
                   className="mt-6"
                   onClick={handleSubmit}
-                  isDisabled={true}
+                  isDisabled={isSubmitting || !values.username || !values.email || !values.password}
+                  isLoading={isSubmitting}
                 >
-                  Geçici olarak devre dışı 
+                  {t("title")}
                 </Button>
 
                 <div className="relative flex items-center py-5">
@@ -203,7 +204,7 @@ export default function Login() {
                   <div className="flex-grow border-t border-gray-400"></div>
                 </div>
 
-                {/* <SignInOAuthButtons /> */}
+                <SignInOAuthButtons />
               </CardBody>
             </>
           )}
