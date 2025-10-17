@@ -65,7 +65,12 @@ const genresRoutes = require("./routes/genres");
 const announcementsRoutes = require("./routes/announcements");
 const filesRoutes = require("./routes/files");
 const subscriberRoutes = require("./routes/subscriber");
+const usersRoutes = require("./routes/users");
+const clerkWebhookRoutes = require("./routes/clerk-webhook");
+
 app.use(express.static("public"));
+app.use("/users", usersRoutes);
+app.use("/webhooks/clerk", clerkWebhookRoutes);
 app.use("/manga", mangaRoutes);
 app.use("/chapter", chapterRoutes);
 app.use("/genres", genresRoutes);
