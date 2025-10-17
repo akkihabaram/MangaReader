@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -21,6 +21,7 @@ import { useRouter } from "next13-progressbar";
 import { useSignUp } from "@clerk/nextjs";
 import { useTranslations } from "next-intl";
 import SignInOAuthButtons from "@/components/SignInOAuthButtons";
+import { useUserSync } from "@/hooks/useUserSync";
 import Link from "next/link";
 
 export default function Login() {
