@@ -43,7 +43,10 @@ export default function Login() {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
-        router.push("/");
+        // Wait for user sync to complete before redirecting
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
       } else {
         console.log(result);
       }
