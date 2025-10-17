@@ -24,9 +24,10 @@ import SignInOAuthButtons from "@/components/SignInOAuthButtons";
 import { useUserSync } from "@/hooks/useUserSync";
 import Link from "next/link";
 
-export default function Login() {
+export default function Register() {
   const t = useTranslations("Register");
   const { isLoaded, signUp, setActive } = useSignUp();
+  const { isSynced } = useUserSync();
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [pendingVerification, setPendingVerification] = useState(false);
