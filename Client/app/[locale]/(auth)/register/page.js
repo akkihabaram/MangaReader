@@ -204,7 +204,7 @@ export default function Login() {
                   <div className="flex-grow border-t border-gray-400"></div>
                 </div>
 
-                {/* <SignInOAuthButtons /> */}
+                <SignInOAuthButtons />
               </CardBody>
             </>
           )}
