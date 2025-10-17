@@ -9,6 +9,7 @@ import { useRouter } from "next13-progressbar";
 import Loading from "@/components/Loading";
 import { useTranslations } from "next-intl";
 import SignInOAuthButtons from "@/components/SignInOAuthButtons";
+import { useUserSync } from "@/hooks/useUserSync";
 import Link from "next/link";
 
 export default function Login() {
