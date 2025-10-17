@@ -76,6 +76,7 @@ export default function Register() {
       return;
     }
     try {
+      setLoading(true);
       const completeSignUp = await signUp.attemptEmailAddressVerification({
         code,
       });
@@ -84,12 +85,17 @@ export default function Register() {
       }
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.push("/");
-        setLoading(false);
+
+        // Wait for user sync to complete before redirecting
+        setTimeout(() => {
+          router.push("/");
+          setLoading(false);
+        }, 1000);
       }
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
       setVerifyError(err.errors[0].message);
+      setLoading(false);
     }
   };
 
