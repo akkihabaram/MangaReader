@@ -3,6 +3,7 @@ import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 import { Next13ProgressBar } from "next13-progressbar";
 import { color } from "@/config";
+import { UserSyncProvider } from "@/components/UserSyncProvider";
 
 export default function Providers({ children }) {
   const [mounted, setMounted] = React.useState(false);
@@ -17,13 +18,15 @@ export default function Providers({ children }) {
 
   return (
     <NextUIProvider>
-      {children}
-      <Next13ProgressBar
-        height="3px"
-        color={color}
-        options={{ showSpinner: true }}
-        showOnShallow
-      />
+      <UserSyncProvider>
+        {children}
+        <Next13ProgressBar
+          height="3px"
+          color={color}
+          options={{ showSpinner: true }}
+          showOnShallow
+        />
+      </UserSyncProvider>
     </NextUIProvider>
   );
 }
