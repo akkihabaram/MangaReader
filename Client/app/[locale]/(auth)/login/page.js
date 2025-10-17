@@ -14,6 +14,7 @@ import Link from "next/link";
 
 export default function Login() {
   const { isLoaded, signIn, setActive } = useSignIn();
+  const { isSynced } = useUserSync();
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [error, setError] = useState(null);
