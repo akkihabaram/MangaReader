@@ -108,14 +108,12 @@ router.get("/list/home", async (req, res) => {
       mangaList.map(async (manga) => {
         let lastTwoChapters = await Chapter.find({
           manga: manga._id,
-          isActive: true, // Sadece aktif bölümler
+          isActive: true,
         })
           .sort({ chapterNumber: -1 })
           .limit(2)
           .select("_id chapterNumber title uploadDate publishDate slug")
           .exec();
-
-        const now = new Date();
 
         return {
           ...manga._doc,
@@ -136,30 +134,6 @@ router.get("/list/home", async (req, res) => {
           return -1;
         }
 
-        const now = new Date();
-
-        // Check if chapters are published and scheduled (publishDate > uploadDate)
-        const aIsScheduledAndPublished =
-          aLastChapter.publishDate <= now &&
-          aLastChapter.publishDate > aLastChapter.uploadDate;
-        const bIsScheduledAndPublished =
-          bLastChapter.publishDate <= now &&
-          bLastChapter.publishDate > bLastChapter.uploadDate;
-
-        // If one is scheduled and published but the other isn't, prioritize the scheduled one
-        if (aIsScheduledAndPublished && !bIsScheduledAndPublished) {
-          return -1;
-        }
-        if (bIsScheduledAndPublished && !aIsScheduledAndPublished) {
-          return 1;
-        }
-
-        // If both are scheduled and published, sort by publishDate
-        if (aIsScheduledAndPublished && bIsScheduledAndPublished) {
-          return bLastChapter.publishDate - aLastChapter.publishDate;
-        }
-
-        // For normal chapters (not scheduled), sort by uploadDate as before
         return bLastChapter.uploadDate - aLastChapter.uploadDate;
       })
       .slice((page - 1) * limit, page * limit);
